@@ -284,6 +284,9 @@ docker compose exec nginx sh
 
 Подробней можно прочитать в документации docker compose: https://docs.docker.com/reference/cli/docker/compose/
 
+> [!CAUTION]
+> Внимание! При использовании операционных систем ALT 10.x или ALT 11.x для команд `Docker Compose` нужно использовать тире, пример `docker-compose ...`. Так как compose поставляется отдельным исполняемым файлом `/usr/local/bin/docker-compose`.
+
 <a id="iporurls"></a>
 # Адресация
 
