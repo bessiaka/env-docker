@@ -2926,7 +2926,7 @@ Lego 4.25.x
 #image: redis:7.2.10-alpine
 image: redis:7.4.5-alpine
 #image: redis:8.0.3-alpine
-#image: redis:8.2.0-alpine
+#image: redis:8.2.1-alpine
 ```
 
 Запускаем все контейнеры, оставляем их работать в фоне:
