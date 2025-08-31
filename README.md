@@ -3197,12 +3197,12 @@ docker pull nginx:1.28.0-alpine-slim
 
 Скачиваем файл для версии 1.28.0 по ссылке: [https://github.com/nginx/docker-nginx/blob/7f1d49f6f222f7e588a9066fd53a0ce43c3466a5/stable/alpine/Dockerfile](https://github.com/nginx/docker-nginx/blob/7f1d49f6f222f7e588a9066fd53a0ce43c3466a5/stable/alpine/Dockerfile)
 
-Модифицируем файл, добавляем нужные модули по списку выше и служебную часть. Пример всех изменений файла для версии 1.28.0 можно найти в папке `/sources/nginx1280modules/`.
+Модифицируем файл, добавляем нужные модули по списку выше и служебную часть. Пример всех изменений файла для версии 1.28.0 можно найти в папке `/sources/bxnginx1280modules/v1/`.
 
 Запускаем сборку образа `nginx_modules`, указываем две архитектуры `amd64` и `arm64` в команде:
 
 ```bash
-cd env-docker/sources/nginx1280modules/
+cd env-docker/sources/bxnginx1280modules/v1/
 docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t nginx_modules:1.28.0-v1-alpine --no-cache .
 ```
 
