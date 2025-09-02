@@ -110,7 +110,7 @@ services:
         aliases:
           - postgres
   mysql:
-    image: quay.io/bitrix24/percona-server:8.0.42-v1-rhel
+    image: quay.io/bitrix24/percona-server:8.0.43-v1-rhel
     #image: quay.io/bitrix24/percona-server:8.4.5-v1-rhel
     container_name: dev_mysql
     restart: unless-stopped

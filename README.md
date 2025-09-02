@@ -2971,7 +2971,7 @@ docker compose up -d
 
 До первого запуска проекта редактируем файл `docker-compose.yml`, в разделе `services` находим сервис `mysql`. В строку с текущей версией `8.0.x` добавляем `#`, в строке с версией `8.4.x` убираем `#`. Итоговый вид:
 ```bash
-#image: quay.io/bitrix24/percona-server:8.0.42-v1-rhel
+#image: quay.io/bitrix24/percona-server:8.0.43-v1-rhel
 image: quay.io/bitrix24/percona-server:8.4.5-v1-rhel
 ```
 
@@ -3051,9 +3051,9 @@ docker pull memcached:1.6.39-alpine
 
 Также нам понадобятся:
 - база данных MySQL:
-  - используем стабильный образ `percona/percona-server:8.0.42` / `percona/percona-server:8.4.5`
+  - используем стабильный образ `percona/percona-server:8.0.43` / `percona/percona-server:8.4.5`
   - добавляем слоем сверху конфигурацию бд
-  - собираем `bitrix24/percona-server:8.0.42-v1-rhel` / `bitrix24/percona-server:8.4.5-v1-rhel`
+  - собираем `bitrix24/percona-server:8.0.43-v1-rhel` / `bitrix24/percona-server:8.4.5-v1-rhel`
 - веб-сервер:
   - используем стабильный образ `nginx:1.28.0-alpine-slim`
   - добавляем модули слоем сверху
@@ -3088,7 +3088,7 @@ docker pull memcached:1.6.39-alpine
 
 Для сборки нам понадобятся следующие образы (их можно предварительно скачать, используя команды):
 ```bash
-docker pull percona/percona-server:8.0.42
+docker pull percona/percona-server:8.0.43
 docker pull percona/percona-server:8.4.5
 docker pull nginx:1.28.0-alpine-slim
 docker pull php:8.2.29-fpm-alpine
@@ -3140,8 +3140,8 @@ docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Doc
 
 - `bitrix24/percona-server` для версии `8.0.x`:
 ```bash
-cd env-docker/sources/bxpercona8042/
-docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t bitrix24/percona-server:8.0.42-v1-rhel --no-cache .
+cd env-docker/sources/bxpercona8043/
+docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t bitrix24/percona-server:8.0.43-v1-rhel --no-cache .
 ```
 
 - `bitrix24/percona-server` для версии `8.4.x`:
