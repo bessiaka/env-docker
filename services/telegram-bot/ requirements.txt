@@ -1,0 +1,31 @@
+# Telegram Bot Framework
+aiogram==3.2.0
+
+# HTTP клиенты для API вызовов
+httpx==0.25.2
+aiohttp==3.9.1
+
+# Конфигурация и переменные окружения
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Redis для состояний и кэша
+redis==5.0.1
+aioredis==2.0.1
+
+# Логирование
+structlog==23.2.0
+
+# Работа с JSON и датами
+orjson==3.9.10
+python-dateutil==2.8.2
+
+# Утилиты
+typing-extensions==4.8.0
+
+# Тестирование
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# Для healthcheck
+requests==2.31.0

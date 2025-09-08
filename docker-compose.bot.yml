@@ -1,0 +1,62 @@
+services:
+  api-gateway:
+    build: 
+      context: ./services/api-gateway
+      dockerfile: Dockerfile
+    container_name: dev_api_gateway
+    restart: unless-stopped
+    env_file:
+      - .env
+      - ./services/api-gateway/.env.api
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./services/api-gateway/app:/app
+    init: true
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:noexec,nodev,nosuid
+      - /var/tmp:noexec,nodev,nosuid
+    networks:
+      dev:
+        aliases:
+          - api-gateway
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  telegram-bot:
+    build: 
+      context: ./services/telegram-bot
+      dockerfile: Dockerfile
+    container_name: dev_telegram_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+      - ./services/telegram-bot/.env.bot
+    volumes:
+      - ./services/telegram-bot/app:/app
+    depends_on:
+      - api-gateway
+    init: true
+    security_opt:
+      - no-new-privileges
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:noexec,nodev,nosuid
+      - /var/tmp:noexec,nodev,nosuid
+    networks:
+      dev:
+        aliases:
+          - telegram-bot
+
+networks:
+  dev:
+    external: true
