@@ -26,10 +26,9 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-#    ports:
-#      - "11211:11211"
+    ports:
+      - "11211:11211"
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -52,13 +51,12 @@ services:
     command: redis-server /usr/local/etc/redis/redis.conf
     env_file:
       - .env
-#    ports:
-#      - "6379:6379"
+    ports:
+      - "6379:6379"
     volumes:
       - redis_data:/data
       - ./confs/redis/redis.conf:/usr/local/etc/redis/redis.conf
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -85,12 +83,11 @@ services:
     env_file:
       - .env
       - .env_sql
-#    ports:
-#      - "5432:5432"
+    ports:
+      - "5432:5522"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -117,14 +114,13 @@ services:
     env_file:
       - .env
       - .env_sql
-#    ports:
-#      - "3306:3306"
-#      - "33060:33060"
+    ports:
+      - "3306:3306"
+      - "33060:33060"
     volumes:
       - mysql_log_data:/var/log/mysql
       - mysql_lib_data:/var/lib/mysql
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -148,20 +144,19 @@ services:
     env_file:
       - .env
       - .env_php
-#    ports:
-#      - "9000:9000"
+    ports:
+      - "9000:9000"
     volumes:
       - ./confs/php82/etc/:/usr/local/etc/
       #- ./confs/php83/etc/:/usr/local/etc/
       #- ./confs/php84/etc/:/usr/local/etc/
-      - www_data:/opt/www/
+      - ./html:/opt/www/
       - bxtemp_data:/opt/.bx_temp/
       - msmtp_data:/opt/msmtp/
       - browscap_data:/opt/browscap/
       - geoip2_data:/opt/geoip2/
       - ssl_data:/ssl/
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -176,7 +171,7 @@ services:
           - php
     depends_on:
       - mysql
-      - postgres
+      - postgres 
   nginx:
     image: quay.io/bitrix24/nginx:1.28.0-v2-alpine
     container_name: dev_nginx
@@ -188,11 +183,10 @@ services:
       - "8589:443"
     volumes:
       - ./confs/nginx/:/etc/nginx/
-      - www_data:/opt/www/
+      - ./html:/opt/www/
       - bxtemp_data:/opt/.bx_temp/
       - ssl_data:/ssl/
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -219,10 +213,9 @@ services:
       - .env_push
       - .env_push_sub
       - .env_redis
-#    ports:
-#      - "8010:8010"
+    ports:
+      - "8010:8010"
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -246,10 +239,9 @@ services:
       - .env_push
       - .env_push_pub
       - .env_redis
-#    ports:
-#      - "9010:9010"
+    ports:
+     - "9010:9010"
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -267,16 +259,15 @@ services:
   sphinx:
     image: quay.io/bitrix24/sphinx:2.2.11-v1-alpine
     container_name: dev_sphinx
-#    ports:
-#      - "9306:9306"
-#      - "9312:9312"
+    ports:
+      - "9306:9306"
+      - "9312:9312"
     restart: unless-stopped
     env_file:
       - .env
     volumes:
       - ./confs/sphinx/sphinx.conf:/opt/sphinx/conf/sphinx.conf
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -300,19 +291,18 @@ services:
     env_file:
       - .env
       - .env_php
-#    ports:
-#      - "9001:9000"
+    ports:
+      - "9001:9000"
     volumes:
       - ./confs/php82/etc/:/usr/local/etc/
       #- ./confs/php83/etc/:/usr/local/etc/
       #- ./confs/php84/etc/:/usr/local/etc/
-      - www_data:/opt/www/
+      - ./html:/opt/www/
       - bxtemp_data:/opt/.bx_temp/
       - msmtp_data:/opt/msmtp/
       - browscap_data:/opt/browscap/
       - geoip2_data:/opt/geoip2/
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -340,7 +330,6 @@ services:
     volumes:
       - ssl_data:/ssl/
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -367,11 +356,10 @@ services:
     env_file:
       - .env
     ports:
-      - "80:80"
+      - "81:80"
     volumes:
       - ssl_data:/ssl/
     init: true
-    cgroup: private
     security_opt:
       - no-new-privileges
     cap_drop:
